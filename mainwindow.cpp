@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     Partie p(QPointer<Ordi>(rouge), QPointer<Humain>(jaune));
-    //p.lancer();
+    p.lancer();
 
 }
 
