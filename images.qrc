@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/pions">
+        <file>images/red.png</file>
+        <file>images/yellow.png</file>
+    </qresource>
+    <qresource prefix="/grille">
+        <file>images/grille.png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>main.qml</file>
+    </qresource>
+</RCC>
