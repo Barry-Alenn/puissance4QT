@@ -4,9 +4,10 @@
 #include "couleur.h"
 #include "partie.h"
 #include <utility>
-#include  <QPointer>
+#include <QPointer>
+#include <memory>
 
-Partie::Partie(QPointer<const Joueur>&& j1, QPointer<const Joueur>&& j2, QWidget *parent)
+Partie::Partie(std::unique_ptr<const Joueur>&& j1, std::unique_ptr<const Joueur>&& j2, QWidget *parent)
     : MainWindow(parent){
   joueurs[0] = std::move(j1);
   joueurs[1] = std::move(j2);

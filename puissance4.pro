@@ -32,6 +32,8 @@ SOURCES += \
     humain.cpp \
     ordi.cpp
 
+CONFIG += c++11 c++14
+
 HEADERS += \
         mainwindow.h \
     jeu.h \

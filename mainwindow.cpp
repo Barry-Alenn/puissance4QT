@@ -5,11 +5,9 @@
 #include "humain.h"
 #include "joueur.h"
 #include "couleur.h"
-#include <QPushButton>
-#include <QGridLayout>
-#include <QPixmap>
 #include <QLabel>
 #include <QPointer>
+#include <memory>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -17,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    Partie p(QPointer<Ordi>(rouge), QPointer<Humain>(jaune));
+    Partie p(std::make_unique<const Ordi>(rouge), std::make_unique<const Humain>(jaune));
     p.lancer();
 
 }
