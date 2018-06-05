@@ -4,17 +4,22 @@
 #include <array>
 #include "joueur.h"
 #include "couleur.h"
-#include  <QPointer>
 #include <memory>
+#include "jeu.h"
 
-class Partie : public MainWindow {
+class Partie {
+
 public:
-  Partie(std::unique_ptr<const Joueur>&&, std::unique_ptr<const Joueur>&&, QWidget *parent = 0);
-  void lancer();
+  Partie(std::unique_ptr<const Joueur>&&, std::unique_ptr<const Joueur>&&);
+  QWidget* lancer();
+  Jeu* getJeu() const {
+      return jeu;
+  }
+  ~Partie();
 
 protected:
   std::array<std::unique_ptr<const Joueur>, 2> joueurs;
-  Jeu jeu;
+  Jeu *jeu;
 };
 
 #endif // PARTIE_H

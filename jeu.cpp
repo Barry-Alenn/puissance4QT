@@ -1,4 +1,3 @@
-#include "mainwindow.h"
 #include "jeu.h"
 #include <vector>
 #include <QWidget>
@@ -6,9 +5,29 @@
 #include <QGridLayout>
 #include <QPixmap>
 #include <QLabel>
+#include <QDebug>
+#include <QButtonGroup>
 
-Jeu::Jeu(unsigned int xGrille , unsigned int yGrille, QWidget *parent)
-  : xGrille(xGrille), yGrille(yGrille), MainWindow(parent), grille(xGrille, std::vector<Couleur>(yGrille, vide) )
+Jeu::Jeu(unsigned int xGrille , unsigned int yGrille, int colJoue_)
+  : xGrille(xGrille), yGrille(yGrille),
+    colJoue(colJoue_),
+    grille(xGrille, std::vector<Couleur>(yGrille, vide)),
+    zoneCentrale(new QWidget()),
+    sizePionX(50),
+    sizePionY(50),
+    pionRed(new QPixmap(":/pions/images/red.png")),
+    pionYellow(new QPixmap(":/pions/images/yellow.png")),
+    pionEmpty(new QPixmap(":/pions/images/empty.png")),
+    wPion(new QWidget(zoneCentrale)),
+    layoutPion(new QGridLayout(wPion)),
+    wGrille(new QWidget(zoneCentrale)),
+    pixmapGrille(new QPixmap(":/grille/images/grille.png")),
+    labelGrille(new QLabel(wGrille)),
+    wButton(new QWidget(zoneCentrale)),
+    layoutButton(new QGridLayout(wButton)),
+    bgroup(new QButtonGroup(wButton)),
+    pionButton(new QPushButton())
+
 {}
 
 // ------------------------------------------------------------
@@ -41,7 +60,7 @@ Couleur Jeu::gagnant() const {
 }
 
 // ------------------------------------------------------------
-unsigned int Jeu::compte(Couleur couleur, size_t i, size_t j, int di, int dj) const
+unsigned int Jeu::compte(Couleur couleur, unsigned int i, unsigned int j, int di, int dj) const
 {
   unsigned int n(1);
   if ((di != 0) or (dj != 0)) {
@@ -69,34 +88,24 @@ bool Jeu::fini(Couleur& resultat) const {
 }
 // ------------------------------------------------------------
 
-void Jeu::affiche() {
-
-  QWidget *zoneCentrale = new QWidget;
-
-  QWidget *wPion = new QWidget(zoneCentrale);
-  const int sizePionX = 50;
-  const int sizePionY = 50;
-  QPixmap pionRed(":/pions/images/red.png");
-  QPixmap pionYellow(":/pions/images/yellow.png");
-
-  //PionImg *pion1 = new PionImg(pion, sizePion);
-
-  QGridLayout *layoutPion = new QGridLayout;
+QWidget* Jeu::affiche() {
 
   layoutPion->setSpacing(2);
   layoutPion->setContentsMargins(18, 43, 0, 0);
 
   if (get_taille() > 0) {
-    size_t j(get_taille()-1);
+    unsigned int j(yGrille - 1);
     do {
       for (unsigned int i(0); i < get_taille(); ++i) {
         switch (grille[i][j]) {
-        case vide  : break;
+        case vide  :
+            layoutPion->addWidget(getPionImg(pionEmpty), (yGrille - j), i);
+            break;
         case rouge :
-            layoutPion->addWidget(getPionImg(pionYellow, sizePionX, sizePionY), j, i);
+            layoutPion->addWidget(getPionImg(pionRed), (yGrille - j), i);
             break;
         case jaune :
-            layoutPion->addWidget(getPionImg(pionRed, sizePionX, sizePionY), j, i);
+            layoutPion->addWidget(getPionImg(pionYellow), (yGrille - j), i);
             break;
         }
       }
@@ -104,42 +113,36 @@ void Jeu::affiche() {
   }
 
   wPion->setLayout(layoutPion);
-/*------------------------------------------------*/
-  QWidget *wGrille = new QWidget(zoneCentrale);
+/*-------------------------------------------------------------------*/
 
-  QLabel *labelGrille  = new QLabel(wGrille);
   labelGrille->setGeometry(0, 0, 400, 400);
-  QPixmap pixmapGrille(":/grille/images/grille.png");
   QSize labelSizeGrille = labelGrille->size();
-    pixmapGrille = pixmapGrille.scaled(labelSizeGrille, Qt::KeepAspectRatio, Qt::FastTransformation);
-    labelGrille->setPixmap(pixmapGrille);
+    *pixmapGrille = pixmapGrille->scaled(labelSizeGrille, Qt::KeepAspectRatio, Qt::FastTransformation);
+    labelGrille->setPixmap(*pixmapGrille);
 
-/*------------------------------------------------*/
-  QWidget *wButton = new QWidget(zoneCentrale);
+/*-------------------------------------------------------------------*/
 
-  //PionButton *button1 = new PionButton();
+    layoutButton->setSpacing(2);
+    layoutButton->setContentsMargins(18, 43, 0, 0);
 
-  QGridLayout *layoutButton = new QGridLayout;
-  layoutButton->setSpacing(2);
-  layoutButton->setContentsMargins(18, 43, 0, 0);
+    for (int i = 0; i < 7; i++)
+    {
+        pionButton = getPionButton(sizePionX, 310);
+        bgroup->addButton(pionButton, i);
+        layoutButton->addWidget(pionButton, 0, i);
+    }
 
-  for(unsigned int i{0}; i <= xGrille; ++i) {
-      for(unsigned int j{0}; j <= yGrille; ++j) {
-          layoutPion->addWidget(getPionButton(sizePionX, sizePionY), j, i);
-      }
-  }
+    wButton->setLayout(layoutButton);
 
-  wButton->setLayout(layoutButton);
-
-  setCentralWidget(zoneCentrale);
+    return zoneCentrale;
 }
 
-QLabel* Jeu::getPionImg(QPixmap &pion, int sizePionX, int sizePionY) {
-    QLabel *labelPion = new QLabel();
+QLabel* Jeu::getPionImg(QPixmap *pion) {
+    QLabel *labelPion = new QLabel(wPion);
     labelPion->setGeometry(0, 0, sizePionX, sizePionY);
     QSize labelSize = labelPion->size();
-         pion = pion.scaled(labelSize, Qt::KeepAspectRatio, Qt::FastTransformation);
-         labelPion->setPixmap(pion);
+         *pion = pion->scaled(labelSize, Qt::KeepAspectRatio, Qt::FastTransformation);
+         labelPion->setPixmap(*pion);
     return labelPion;
 }
 
@@ -150,3 +153,11 @@ QPushButton* Jeu::getPionButton(int sizePionX, int sizePionY) {
     button->setUpdatesEnabled(false);
     return button;
 }
+
+void Jeu::addPion() {
+
+    layoutPion->removeWidget(layoutPion->itemAtPosition(5, 1)->widget());
+    delete layoutPion->itemAtPosition(5, 1)->widget();
+    layoutPion->addWidget(getPionImg(pionRed), 5, 1);
+}
+

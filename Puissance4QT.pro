@@ -8,7 +8,7 @@ QT       += core gui qml quick
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = puissance4
+TARGET = Puissance4QT
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -32,7 +32,7 @@ SOURCES += \
     humain.cpp \
     ordi.cpp
 
-CONFIG += c++11 c++14
+CONFIG += debug_and_release c++11 c++14
 
 HEADERS += \
         mainwindow.h \

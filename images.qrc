@@ -2,6 +2,7 @@
     <qresource prefix="/pions">
         <file>images/red.png</file>
         <file>images/yellow.png</file>
+        <file>images/empty.png</file>
     </qresource>
     <qresource prefix="/grille">
         <file>images/grille.png</file>

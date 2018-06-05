@@ -6,8 +6,9 @@
 #include "joueur.h"
 #include "couleur.h"
 #include <QLabel>
-#include <QPointer>
 #include <memory>
+#include <QDebug>
+#include <QThread>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -15,8 +16,16 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    Partie p(std::make_unique<const Ordi>(rouge), std::make_unique<const Humain>(jaune));
-    p.lancer();
+    Partie p(std::make_unique<const Humain>(jaune), std::make_unique<const Ordi>(rouge));
+
+    setCentralWidget(p.lancer());
+
+    connect( p.getJeu()->getBgroup(), static_cast<void(QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked),
+        [=, &p](int colButton){
+        //p.getJeu()->setColJoue(colButton);
+        qDebug() << colButton;
+        p.getJeu()->addPion();
+    });
 
 }
 

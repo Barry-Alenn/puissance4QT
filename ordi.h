@@ -8,7 +8,7 @@
 class Ordi : public Joueur  {
 public:
   Ordi(Couleur couleur = jaune) : Joueur("Le programme", couleur) {}
-  void jouer(Jeu&) const;
+  void jouer(Jeu*) const;
 };
 
 #endif // ORDI_H

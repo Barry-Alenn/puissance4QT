@@ -9,10 +9,9 @@ class Humain : public Joueur  {
 public:
   Humain(Couleur une_couleur = rouge)
       : Joueur("quidam", une_couleur) {
-    nom = "quidam";
-    wLabel->setText("Entrez votre nom : ");
+
   }
-  void jouer(Jeu&) const;
+  void jouer(Jeu*) const;
 };
 
 #endif // HUMAIN_H
