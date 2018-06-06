@@ -6,7 +6,6 @@
 #include <QGridLayout>
 #include <QPixmap>
 #include <QLabel>
-#include <QDebug>
 #include <QButtonGroup>
 
 Jeu::Jeu(unsigned int xGrille , unsigned int yGrille, int colJoue_)
@@ -157,8 +156,8 @@ QPushButton* Jeu::getPionButton(int sizePionX, int sizePionY) {
 
 void Jeu::addPion() {
 
-    layoutPion->removeWidget(layoutPion->itemAtPosition(5, 1)->widget());
+    //layoutPion->removeWidget(layoutPion->itemAtPosition(5, 1)->widget());
     delete layoutPion->itemAtPosition(5, 1)->widget();
-    layoutPion->addWidget(getPionImg(pionRed), 5, 1);
+    //layoutPion->addWidget(getPionImg(pionRed), 5, 1);
 }
 

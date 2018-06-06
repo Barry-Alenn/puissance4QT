@@ -1,15 +1,13 @@
 #ifndef JEU_H
 #define JEU_H
-#include "mainwindow.h"
+
 #include <vector>
 #include "couleur.h"
 #include <QWidget>
 #include <QGridLayout>
-#include <QWidget>
 #include <QPushButton>
 #include <QPixmap>
 #include <QLabel>
-#include <QDebug>
 #include <QButtonGroup>
 
 class Jeu : public QWidget {

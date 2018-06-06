@@ -7,6 +7,7 @@
 #include <array>
 
 Partie::Partie(std::unique_ptr<const Joueur>&& j1, std::unique_ptr<const Joueur>&& j2)
+    : jeu(new Jeu())
 {
   joueurs[0] = std::move(j1);
   joueurs[1] = std::move(j2);
