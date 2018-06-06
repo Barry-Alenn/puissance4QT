@@ -1,13 +1,14 @@
 #ifndef ORDI_H
 #define ORDI_H
-#include "mainwindow.h"
+
+#include "jeu.h"
 #include "joueur.h"
 #include "couleur.h"
-#include "jeu.h"
+
 
 class Ordi : public Joueur  {
 public:
-  Ordi(Couleur couleur = jaune) : Joueur("Le programme", couleur) {}
+  Ordi(Couleur couleur = jaune);
   void jouer(Jeu*) const;
 };
 

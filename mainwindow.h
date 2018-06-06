@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "partie.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +18,7 @@ public:
 
 protected:
     Ui::MainWindow *ui;
+    Partie p;
 };
 
 #endif // MAINWINDOW_H

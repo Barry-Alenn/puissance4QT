@@ -6,7 +6,6 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    //w.setGeometry(600, 300, 400, 400);
 
     w.setMinimumSize(600, 400);
     w.setMaximumSize(600, 400);

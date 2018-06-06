@@ -1,8 +1,12 @@
-#include "mainwindow.h"
+
 #include "humain.h"
 #include "jeu.h"
 
-void Humain::jouer(Jeu *jeu) const {
+Humain::Humain(Couleur une_couleur)
+    : Joueur("quidam", une_couleur)
+{}
+
+void Humain::jouer(Jeu* jeu) const {
 
   //unsigned int lu;
   bool valide;

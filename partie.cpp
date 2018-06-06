@@ -1,13 +1,12 @@
-#include "mainwindow.h"
-#include <array>
+
+#include "partie.h"
 #include "joueur.h"
 #include "couleur.h"
-#include "partie.h"
 #include <utility>
 #include <memory>
+#include <array>
 
 Partie::Partie(std::unique_ptr<const Joueur>&& j1, std::unique_ptr<const Joueur>&& j2)
-    : jeu(new Jeu())
 {
   joueurs[0] = std::move(j1);
   joueurs[1] = std::move(j2);
@@ -33,7 +32,11 @@ QWidget* Partie::lancer() {
   */
 }
 
+Jeu* Partie::getJeu() const {
+    return jeu;
+}
+
 Partie::~Partie()
 {
-    delete jeu;
+    //delete jeu;
 }

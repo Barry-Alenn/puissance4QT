@@ -1,20 +1,18 @@
 #ifndef PARTIE_H
 #define PARTIE_H
-#include "mainwindow.h"
-#include <array>
+
+#include <QWidget>
 #include "joueur.h"
 #include "couleur.h"
 #include <memory>
-#include "jeu.h"
+#include <array>
 
 class Partie {
 
 public:
   Partie(std::unique_ptr<const Joueur>&&, std::unique_ptr<const Joueur>&&);
   QWidget* lancer();
-  Jeu* getJeu() const {
-      return jeu;
-  }
+  Jeu* getJeu() const;
   ~Partie();
 
 protected:

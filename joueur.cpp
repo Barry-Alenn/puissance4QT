@@ -1,8 +1,8 @@
-//#include "mainwindow.h"
+
 #include "joueur.h"
 #include <QString>
 
-Joueur::Joueur(const QString& un_nom, const Couleur& une_couleur = rouge )
+Joueur::Joueur(const QString& un_nom, const Couleur& une_couleur)
     : nom(un_nom), couleur(une_couleur) {}
 
 QString Joueur::get_nom() const { return nom; }
