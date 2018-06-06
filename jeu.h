@@ -10,8 +10,8 @@
 #include <QLabel>
 #include <QButtonGroup>
 
-class Jeu : public QWidget {
-   Q_OBJECT
+class Jeu {
+
 public:
   Jeu(unsigned int xGrille = 7, unsigned int yGrille = 6, int colJoue_ = 1);
 

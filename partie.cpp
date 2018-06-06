@@ -33,7 +33,7 @@ QWidget* Partie::lancer() {
   */
 }
 
-Jeu* Partie::getJeu() const {
+std::unique_ptr<Jeu> Partie::getJeu() const {
     return jeu;
 }
 
