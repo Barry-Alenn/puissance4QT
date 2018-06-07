@@ -12,12 +12,12 @@ class Partie {
 public:
   Partie(std::unique_ptr<const Joueur>&&, std::unique_ptr<const Joueur>&&);
   QWidget* lancer();
-  std::unique_ptr<Jeu> getJeu() const;
+  Jeu* getJeu() const;
   ~Partie();
 
 protected:
   std::array<std::unique_ptr<const Joueur>, 2> joueurs;
-  std::unique_ptr<Jeu> jeu;
+  Jeu* jeu;
 };
 
 #endif // PARTIE_H

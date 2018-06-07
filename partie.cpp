@@ -33,11 +33,12 @@ QWidget* Partie::lancer() {
   */
 }
 
-std::unique_ptr<Jeu> Partie::getJeu() const {
+Jeu* Partie::getJeu() const {
     return jeu;
 }
 
 Partie::~Partie()
 {
-    //delete jeu;
+    delete jeu;
+    jeu = nullptr;
 }
